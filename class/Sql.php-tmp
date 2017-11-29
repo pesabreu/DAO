@@ -1,0 +1,58 @@
+
+Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5/ext/php_pdo_sqlsrv_71_ts.dll' - %1 não é um aplicativo Win32 válido.
+ in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5/ext/php_pdo_sqlsrv_71_nts.dll' - %1 não é um aplicativo Win32 válido.
+ in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5/ext/php_sqlsrv_71_ts.dll' - %1 não é um aplicativo Win32 válido.
+ in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5/ext/php_sqlsrv_71_nts.dll' - %1 não é um aplicativo Win32 válido.
+ in Unknown on line 0
+<?php
+
+/**
+ *
+ */
+class Sql extends PDO {
+	private $conn;
+
+	function __construct() {
+		$this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "103622");
+
+	}
+
+	private function setParams($statement, $parameters = array()) {
+
+		foreach ($parameters as $key => $value) {
+			$this->setParam($statement, $key, $value);
+		}
+	}
+
+	private function setParam($statement, $key, $value) {
+
+		$statement->bindParam($key, $value);
+	}
+
+	public function query($rawQuery, $params = array()) {
+
+		$stmt = $this->conn->prepare($rawQuery);
+
+		$this->setParams($stmt, $params);
+
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	public function select($rawQuery, $params = array()):array{
+
+		$stmt = $this->query($rawQuery, $params);
+
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+}
+
+?>
