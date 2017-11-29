@@ -11,9 +11,8 @@ Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5
 Warning: PHP Startup: Unable to load dynamic library 'C:/wamp64/bin/php/php7.1.5/ext/php_sqlsrv_71_nts.dll' - %1 não é um aplicativo Win32 válido.
  in Unknown on line 0
 <?php
-
 /**
- *
+ * Classe de conexÃ£o no BD via PDO
  */
 class Sql extends PDO {
 	private $conn;

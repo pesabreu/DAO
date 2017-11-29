@@ -1,8 +1,6 @@
 <?php
-
-
 /**
-* 
+* Classe de conexão no BD via PDO
 */
 class Sql extends PDO
 {

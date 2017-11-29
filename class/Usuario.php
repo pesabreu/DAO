@@ -52,20 +52,21 @@ class Usuario {
             ":ID" => $id
         ));
 
-        if (isset($results[0])) {
+        if (isset($results[0])) {               // if (count($results) > 0)
             $this->setData($results[0]);
         }
+
     }
 
     public static function getList() {
+        
         $sql = new Sql();
-
         return $sql->select("SELECT * FROM usuarios ORDER BY login");
     }
 
     public static function search($login) {
+        
         $sql = new Sql();
-
         return $sql->select("SELECT * FROM usuarios WHERE login LIKE :SEARCH ORDER BY login", array(
                     ':SEARCH' => "%" . $login . "%"
         ));
