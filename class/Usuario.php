@@ -58,15 +58,15 @@ class Usuario {
 
     }
 
-    public static function getList() {
-        
+    public static function getList() {      
         $sql = new Sql();
+
         return $sql->select("SELECT * FROM usuarios ORDER BY login");
     }
 
-    public static function search($login) {
-        
+    public static function search($login) {        
         $sql = new Sql();
+        
         return $sql->select("SELECT * FROM usuarios WHERE login LIKE :SEARCH ORDER BY login", array(
                     ':SEARCH' => "%" . $login . "%"
         ));
